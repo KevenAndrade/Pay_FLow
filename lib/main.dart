@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_flow/modules/home.dart';
 import 'package:pay_flow/modules/splash.dart';
 import 'package:pay_flow/shared/themes/appcolors.dart';
 
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.primary,
       ),
-      home: Loginpage(),
-    ); //Splashpage
+      home: Splashpage(),
+    ); //Splashpage HomePage Loginpage
   }
 }
 
