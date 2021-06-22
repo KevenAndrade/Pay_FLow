@@ -35,21 +35,28 @@ class _LoginpageState extends State<Loginpage> {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: size.height * 0.18,
+                bottom: size.height * 0.05,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(AppImages.logomini),
                       Padding(
-                        padding: const EdgeInsets.only(top:30 ,right: 70, left: 70),
+                        padding:
+                            const EdgeInsets.only(top: 20, right: 70, left: 70),
                         child: Text(
                           "Organize suas faturas num só lugar",
                           textAlign: TextAlign.center,
                           style: TextStyles.titleHome,
                         ),
                       ),
-                      Sociallogin()
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(right: 40, left: 40, top: 30),
+                        child: Sociallogin(onTap: () {
+                          print("LOGANDO");
+                        }),
+                      )
                     ]),
               ),
             ],
