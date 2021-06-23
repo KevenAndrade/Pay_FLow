@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pay_flow/shared/themes/appcolors.dart';
 import 'package:pay_flow/shared/themes/appimages.dart';
 import 'package:pay_flow/shared/themes/apptextstyles.dart';
@@ -35,7 +36,7 @@ class _LoginpageState extends State<Loginpage> {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: size.height * 0.05,
+                bottom: size.height * 0.15,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,8 +54,18 @@ class _LoginpageState extends State<Loginpage> {
                       Padding(
                         padding:
                             const EdgeInsets.only(right: 40, left: 40, top: 30),
-                        child: Sociallogin(onTap: () {
-                          print("LOGANDO");
+                        child: Sociallogin(onTap: () async {
+                          GoogleSignIn _googleSignIn = GoogleSignIn(
+                            scopes: [
+                              'email',
+                            ],
+                          );
+                          try {
+                            final response = await _googleSignIn.signIn();
+                            print(response);
+                          } catch (error) {
+                            print(error);
+                          }
                         }),
                       )
                     ]),

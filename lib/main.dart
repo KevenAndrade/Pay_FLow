@@ -1,11 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_flow/app_widget.dart';
-import 'package:pay_flow/modules/home.dart';
-import 'package:pay_flow/modules/splash.dart';
-import 'package:pay_flow/shared/themes/appcolors.dart';
 
-import 'modules/login.dart';
 
 void main() {
   runApp(AppFirebase());
@@ -31,7 +27,7 @@ class _AppFirebaseState extends State<AppFirebase> {
           return Material(
             child: Center(
               child: Text(
-                "Nao foi possivel iniciar o firebase",
+                "Nao foi possivel iniciar o firebase $snapshot.error",
                 textDirection: TextDirection.ltr,
               )
             )
