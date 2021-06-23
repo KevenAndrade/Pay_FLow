@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_flow/app_widget.dart';
 import 'package:pay_flow/modules/home.dart';
 import 'package:pay_flow/modules/splash.dart';
 import 'package:pay_flow/shared/themes/appcolors.dart';
@@ -6,20 +8,49 @@ import 'package:pay_flow/shared/themes/appcolors.dart';
 import 'modules/login.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(AppFirebase());
 }
 
-class MyApp extends StatelessWidget {
+class AppFirebase extends StatefulWidget {
   // This widget is the root of your application.
   @override
+  _AppFirebaseState createState() => _AppFirebaseState();
+}
+
+class _AppFirebaseState extends State<AppFirebase> {
+  final Future<FirebaseApp> _intialization = Firebase.initializeApp();
+
+ @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pay Flow',
-      theme: ThemeData(
-        primaryColor: AppColors.primary,
-      ),
-      home: Splashpage(),
-    ); //Splashpage HomePage Loginpage
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _intialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Material(
+            child: Center(
+              child: Text(
+                "Nao foi possivel iniciar o firebase",
+                textDirection: TextDirection.ltr,
+              )
+            )
+          );
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MyApp();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return Material(
+            child: Center(
+              child: CircularProgressIndicator()
+            )
+          );
+      },
+    );
   }
 }
 
