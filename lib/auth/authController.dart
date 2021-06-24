@@ -11,6 +11,7 @@ class AuthController {
 
   void setUser(BuildContext context, UserModel? user) {
     if (user != null) {
+      saveUser(user);
       _isAuthenticated = true;
       _user = user;
       Navigator.pushReplacementNamed(context, "/home");
@@ -28,7 +29,8 @@ class AuthController {
 
   Future<void> currentUser(BuildContext context) async {
     final instance = await SharedPreferences.getInstance();
-    if(instance.containsKey("user")){
+    await Future.delayed(Duration(seconds: 2));
+    if (instance.containsKey("user")) {
       final user = await instance.get("user") as String;
       setUser(context, UserModel.fromJson(user));
       return;
