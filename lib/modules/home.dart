@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:pay_flow/controller/home_controller.dart';
 import 'package:pay_flow/shared/themes/appcolors.dart';
 import 'package:pay_flow/shared/themes/apptextstyles.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final controller = new HomeController();
+  final pages = [
+    Container(
+      color: Colors.red,
+    ),
+    Container(
+      color: Colors.blue,
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +50,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ))),
+      body: pages[controller.currentPage],
       bottomNavigationBar: Container(
           height: 90,
           child: Row(
@@ -42,7 +59,10 @@ class HomePage extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.home),
                 color: AppColors.primary,
-                onPressed: () {},
+                onPressed: () {
+                  controller.setPage(0);
+                  setState(() {});
+                },
               ),
               GestureDetector(
                 onTap: () {
@@ -62,7 +82,10 @@ class HomePage extends StatelessWidget {
               IconButton(
                   icon: Icon(Icons.description_outlined),
                   color: AppColors.body,
-                  onPressed: () {})
+                  onPressed: () {
+                    controller.setPage(1);
+                    setState(() {});
+                  })
             ],
           )),
     );
