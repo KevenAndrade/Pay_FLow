@@ -6,7 +6,7 @@ import 'package:pay_flow/shared/themes/apptextstyles.dart';
 class Sociallogin extends StatelessWidget {
   final VoidCallback onTap;
 
-  const Sociallogin({Key key, this.onTap}) : super(key: key);
+  const Sociallogin({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

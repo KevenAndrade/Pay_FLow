@@ -7,7 +7,7 @@ import 'package:pay_flow/shared/themes/apptextstyles.dart';
 import 'package:pay_flow/shared/widget/socialLogin.dart';
 
 class Loginpage extends StatefulWidget {
-  Loginpage({Key key}) : super(key: key);
+  Loginpage({Key? key}) : super(key: key);
   @override
   _LoginpageState createState() => _LoginpageState();
 }
