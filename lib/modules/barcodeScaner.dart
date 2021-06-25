@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pay_flow/modules/buttons.dart';
+import 'package:pay_flow/modules/setlabelbuttons.dart';
 import 'package:pay_flow/shared/themes/appcolors.dart';
 import 'package:pay_flow/shared/themes/apptextstyles.dart';
 
@@ -26,6 +27,10 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
             Expanded(child: Container(color: Colors.black)),
           ],
         ),
-        bottomNavigationBar: LabelButton(label: "Label", onPressed: () {}));
+        bottomNavigationBar: setlabelbutton(
+            primero: "Inserir código da fatura", 
+            segundo: "Adicionar da galeria", 
+            primerof: () {}, 
+            segundof: () {}));
   }
 }
