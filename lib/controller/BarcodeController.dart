@@ -7,7 +7,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pay_flow/controller/BarcodeStatus.dart';
 
 class BarcodeController {
-  BarcodeStatus status = new BarcodeStatus();
+  final statusNotifier = ValueNotifier<BarcodeStatus>(BarcodeStatus());
+
+  BarcodeStatus get status => statusNotifier.value;
+  set status(BarcodeStatus status) => statusNotifier.value = status;
+
   final barcodeScaner = GoogleMlKit.vision.barcodeScanner();
 
   void getAvailableCamera() async {
