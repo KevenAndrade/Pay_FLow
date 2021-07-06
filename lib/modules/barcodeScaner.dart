@@ -29,13 +29,7 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
 
   @override
   Widget build(BuildContext context) {
-    /* return BottonSheet(
-        primero: "Escanear novamente",
-        segundo: "Digitar codigo",
-        primerof: () {},
-        segundof: () {},
-        title: "Não foi possivel identificar um codigo",
-        subtitle: "Tente escrevernovamente ou digite o codigo do seu boleto."); */
+    /*  */
     return SafeArea(
       top: true,
       bottom: true,
@@ -57,7 +51,7 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
           RotatedBox(
             quarterTurns: 1,
             child: Scaffold(
-              backgroundColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 appBar: AppBar(
                     centerTitle: true,
                     backgroundColor: Colors.black,
@@ -81,6 +75,25 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
                     segundo: "Adicionar da galeria",
                     primerof: () {},
                     segundof: () {})),
+          ),
+          ValueListenableBuilder<BarcodeStatus>(
+            valueListenable: controller.statusNotifier,
+            builder: (_, status, __) {
+              if (status.hasError) {
+                return BottonSheet(
+                    primero: "Escanear novamente",
+                    segundo: "Digitar codigo",
+                    primerof: () {
+                      controller.getAvailableCamera();
+                    },
+                    segundof: () {},
+                    title: "Não foi possivel identificar um codigo",
+                    subtitle:
+                        "Tente escrevernovamente ou digite o codigo do seu boleto.");
+              } else {
+                return Container();
+              }
+            },
           ),
         ],
       ),

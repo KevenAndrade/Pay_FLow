@@ -25,6 +25,7 @@ class BarcodeController {
         ResolutionPreset.max,
         enableAudio: false,
       );
+      await cameraController.initialize();
       status = BarcodeStatus.available(cameraController);
       scanWithCamera();
     } catch (e) {
@@ -128,5 +129,4 @@ class BarcodeController {
       status.cameraController!.dispose();
     }
   }
-  
 }
