@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pay_flow/controller/BarcodeController.dart';
+import 'package:pay_flow/controller/BarcodeStatus.dart';
 import 'package:pay_flow/modules/buttons.dart';
 import 'package:pay_flow/modules/setlabelbuttons.dart';
 import 'package:pay_flow/shared/bottonSheet.dart';
@@ -11,6 +13,20 @@ class BarcodeScanerPage extends StatefulWidget {
 }
 
 class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
+  final controller = BarcodeController();
+
+  @override
+  void initState() {
+    controller.getAvailableCamera();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     /* return BottonSheet(
@@ -25,32 +41,48 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
       bottom: true,
       left: true,
       right: true,
-      child: RotatedBox(
-        quarterTurns: 1,
-        child: Scaffold(
-            appBar: AppBar(
-                centerTitle: true,
-                backgroundColor: Colors.black,
-                title: Text("Escaneie o codigo da fatura",
-                    style: TextStyles.buttonBackground),
-                leading: BackButton(
-                  color: AppColors.background,
-                )),
-            body: Column(
-              children: [
-                Expanded(child: Container(color: Colors.black)),
-                Expanded(
-                    flex: 2,
-                    child:
-                        Container(color: Colors.transparent.withOpacity(0.6))),
-                Expanded(child: Container(color: Colors.black)),
-              ],
-            ),
-            bottomNavigationBar: setlabelbutton(
-                primero: "Inserir código da fatura",
-                segundo: "Adicionar da galeria",
-                primerof: () {},
-                segundof: () {})),
+      child: Stack(
+        children: [
+          ValueListenableBuilder<BarcodeStatus>(
+            valueListenable: controller.statusNotifier,
+            builder: (_, status, __) {
+              if (status.showCamera) {
+                return Container(
+                    child: status.cameraController!.buildPreview());
+              } else {
+                return Container();
+              }
+            },
+          ),
+          RotatedBox(
+            quarterTurns: 1,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                    centerTitle: true,
+                    backgroundColor: Colors.black,
+                    title: Text("Escaneie o codigo da fatura",
+                        style: TextStyles.buttonBackground),
+                    leading: BackButton(
+                      color: AppColors.background,
+                    )),
+                body: Column(
+                  children: [
+                    Expanded(child: Container(color: Colors.black)),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                            color: Colors.transparent.withOpacity(0.6))),
+                    Expanded(child: Container(color: Colors.black)),
+                  ],
+                ),
+                bottomNavigationBar: setlabelbutton(
+                    primero: "Inserir código da fatura",
+                    segundo: "Adicionar da galeria",
+                    primerof: () {},
+                    segundof: () {})),
+          ),
+        ],
       ),
     );
   }
