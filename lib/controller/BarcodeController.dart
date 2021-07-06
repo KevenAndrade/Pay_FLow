@@ -58,6 +58,7 @@ class BarcodeController {
 
       if (barcode != null && status.barcode.isEmpty) {
         status = BarcodeStatus.barcode(barcode);
+        if (status.cameraController != null)
         status.cameraController!.dispose();
       } else {
         getAvailableCamera();
@@ -75,6 +76,7 @@ class BarcodeController {
   }
 
   void listenCamera() {
+    if (status.cameraController != null)
     if (status.cameraController!.value.isStreamingImages == false)
       status.cameraController!.startImageStream((cameraImage) async {
         try {
