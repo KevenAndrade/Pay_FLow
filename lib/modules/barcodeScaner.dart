@@ -47,7 +47,7 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
             builder: (_, status, __) {
               if (status.showCamera) {
                 return Container(
-                    child: status.cameraController!.buildPreview());
+                    child: controller.cameraController!.buildPreview());
               } else {
                 return Container();
               }
@@ -89,7 +89,7 @@ class _BarcodeScanerPageState extends State<BarcodeScanerPage> {
                     primero: "Escanear novamente",
                     segundo: "Digitar codigo",
                     primerof: () {
-                      controller.getAvailableCamera();
+                      controller.scanWithCamera();
                     },
                     segundof: () {},
                     title: "Não foi possivel identificar um codigo",
